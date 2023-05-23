@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,14 +38,6 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
-
-    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Detail::class)]
-    private Collection $details;
-
-    public function __construct()
-    {
-        $this->details = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -146,36 +136,6 @@ class Produit
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Detail>
-     */
-    public function getDetails(): Collection
-    {
-        return $this->details;
-    }
-
-    public function addDetail(Detail $detail): self
-    {
-        if (!$this->details->contains($detail)) {
-            $this->details->add($detail);
-            $detail->setProduits($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDetail(Detail $detail): self
-    {
-        if ($this->details->removeElement($detail)) {
-            // set the owning side to null (unless already changed)
-            if ($detail->getProduits() === $this) {
-                $detail->setProduits(null);
-            }
-        }
 
         return $this;
     }
