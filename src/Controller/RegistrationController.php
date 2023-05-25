@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        $form->handleRequest($request);//submit
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -41,8 +41,8 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $entityManager->persist($user);//save
+            $entityManager->flush();//nettoyer
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,

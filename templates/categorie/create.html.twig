@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creér une categorie!{% endblock %}
+
+{% block body %}
+{{ form_start(categorieForm)}}
+    {{form_row(categorieForm.nom)}}
+    {{form_row(categorieForm.famille)}}
+
+
+    <button class="btn btn-secondary" type=submit>Enrégistrer</button>
+{{ form_end(categorieForm)}}
+{% endblock %}

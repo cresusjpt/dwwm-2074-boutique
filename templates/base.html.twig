@@ -33,12 +33,17 @@
 					</a>
 
 					<nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-						{% if is_granted("ROLE_ADMIN") %}
+					{#
+					{% if is_granted("ROLE_ADMIN") %}
 							<a class="me-3 py-2 text-dark text-decoration-none" href="{{path('listuser')}}">Admin</a>
 						{% endif %}
+
 						{% if is_granted("ROLE_STOCK") %}
 							<a class="me-3 py-2 text-dark text-decoration-none" href="{{path('category_index')}}">Stock</a>
 						{% endif %}
+					#}
+						
+						
 						{% if is_granted("ROLE_USER") %}
                         {# <a class="me-3 py-2 text-dark text-decoration-none" href="{{path('panier')}}">Panier({{app.request.cookies.get('taillepanier')}})</a> #}
 							<a class="me-3 py-2 text-dark text-decoration-none" href="#">Profile</a>
